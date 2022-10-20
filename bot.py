@@ -16,8 +16,14 @@ app = TeleBot(TOKEN)
 # listener
 @app.message_handler(func=lambda message: True)
 def echo_all(message):
-    if 'http://' in message.text or 'https://' in message.text:
-        # app.reply_to(message, 'URL detected')
+    if message.text.find('@') != -1:
+        print("Found username in message text")
+        app.delete_message(message.chat.id, message.message_id)
+    elif message.text.find('t.me') != -1:
+        print("Found link to username in message text")
+        app.delete_message(message.chat.id, message.message_id)
+    elif message.text.find('http://') != -1 or message.text.find('https://') != -1:
+        print("Found link to website in message text")
         app.delete_message(message.chat.id, message.message_id)
 
 # keep alive
