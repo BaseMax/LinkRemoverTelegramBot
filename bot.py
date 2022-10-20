@@ -9,6 +9,9 @@ from telebot import TeleBot
 
 # config
 TOKEN = '5592542597:AAFZyzDCL8wNPlYNzR8fzh8wxAS0tVkxUn4'
+ADMINS = [
+    '123456789'
+]
 
 # setup
 app = TeleBot(TOKEN)
@@ -16,6 +19,9 @@ app = TeleBot(TOKEN)
 # listener
 @app.message_handler(func=lambda message: True)
 def echo_all(message):
+    if message.from_user.id in ADMINS:
+        return
+
     if message.text.find('@') != -1:
         print("Found username in message text")
         app.delete_message(message.chat.id, message.message_id)
