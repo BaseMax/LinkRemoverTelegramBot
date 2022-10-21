@@ -10,15 +10,15 @@ from telebot import TeleBot
 # config
 TOKEN = '5592542597:AAFZyzDCL8wNPlYNzR8fzh8wxAS0tVkxUn4'
 ADMINS = [
-    '123456789'
+    '1215864830'
 ]
 
 # setup
 app = TeleBot(TOKEN)
 
-# listener
-@app.message_handler(func=lambda message: True)
-def echo_all(message):
+def check_message(type, message):
+    print(type, message)
+
     if message.from_user.id in ADMINS:
         return
 
@@ -31,6 +31,16 @@ def echo_all(message):
     elif message.text.find('http://') != -1 or message.text.find('https://') != -1:
         print("Found link to website in message text")
         app.delete_message(message.chat.id, message.message_id)
+
+# edit message listener
+@app.edited_message_handler(func=lambda message: True)
+def edit_message(message):
+    check_message("edit", message)
+
+# new message listener
+@app.message_handler(func=lambda message: True)
+def new_message(message):
+    check_message("new", message)
 
 # keep alive
 if __name__ == '__main__':
