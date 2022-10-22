@@ -23,7 +23,7 @@ def check_message(type, message):
     if message.from_user.id in ADMINS:
         return
 
-        # check getChatMember, check is creator or administrator
+    # check getChatMember, check is creator or administrator
     chat_member = app.get_chat_member(message.chat.id, message.from_user.id)
     print("==================> User data:", chat_member)
     if chat_member.status == 'creator' or chat_member.status == 'administrator':
