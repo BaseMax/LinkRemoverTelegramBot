@@ -12,6 +12,8 @@ A Python-based **Telegram Bot** for deleting all kind of URLs and links in almos
 ## Using
 
 ```bash
+$ pip install -r requirements.txt
+or
 $ pip install pyTelegramBotAPI
 ```
 
